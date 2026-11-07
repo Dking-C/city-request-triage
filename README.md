@@ -4,9 +4,9 @@ A browser based portfolio prototype that turns a small public 311 request sample
 
 ## Try it
 
-Open [`index.html`](index.html) in a modern browser. The page starts with synthetic demo records. Use **Load live 311 sample** to fetch up to 40 recent requests from NYC Open Data, or **Import CSV** to load an export, then choose **Run triage workflow**. Export the resulting queue as CSV.
+To use the live API, double-click [`start_local_server.bat`](start_local_server.bat), keep its window open, and visit `http://localhost:8000` in your browser. This serves the page from localhost instead of `file://`. The page starts with synthetic demo records. Use **Load live 311 sample** to fetch up to 40 recent requests from NYC Open Data, or **Import CSV** to load an export, then choose **Run triage workflow**. Export the resulting queue as CSV.
 
-No build tools or API key are required. The live sample needs an internet connection and browser access to the data portal. If the API is unavailable, import a CSV export or use the synthetic demo records.
+Python must be installed for the local server script. No packages or API key are required. The live sample also needs internet access to the data portal. If the API is unavailable, import a CSV export or use the synthetic demo records. Opening `index.html` directly as a `file://` URL may block the API request in some browsers.
 
 ## What it demonstrates
 
