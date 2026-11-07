@@ -13,13 +13,11 @@ No build tools or API key are required. The live sample needs an internet connec
 - Ingest a bounded sample from a public API.
 - Apply category and keyword routing rules.
 - Assign demo priorities and target times.
-- Explain each routing decision with a reason.
-- Catch missing fields, duplicate IDs, and unmatched categories for human review.
-- Search and filter the queue, record the run, and export decision reasons with the data.
+- Send incomplete or unclear rows to a human review queue.
+- Record decisions in a run log and export the queue.
 
-Routing rules and priorities are illustrative. This prototype does not represent NYC policy, contact city staff, or write to a city system. See [`GUIDE.md`](GUIDE.md) for the workflow design, stack, limitations, and next improvements.
+Routing rules and target times are illustrative. This prototype does not represent NYC policy, contact city staff, or write to a city system. See [`GUIDE.md`](GUIDE.md) for the workflow design, stack, limitations, and next improvements.
 
 ## Data
 
 [NYC Open Data: 311 Service Requests from 2020 to Present](https://data.cityofnewyork.us/Social-Services/311-Service-Requests-from-2020-to-Present/erm2-nwe9/about_data)
-
