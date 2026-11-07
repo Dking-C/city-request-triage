@@ -4,13 +4,13 @@ A browser based portfolio prototype that turns a small public 311 request sample
 
 ## Try it
 
-To use the live API, double-click [`start_local_server.bat`](start_local_server.bat), keep its window open, and visit `http://localhost:8000` in your browser. This serves the page from localhost instead of `file://`. The page starts with synthetic demo records. Use **Load live 311 sample** to fetch up to 40 recent requests from NYC Open Data, or **Import CSV** to load an export, then choose **Run triage workflow**. Export the resulting queue as CSV.
+Open the [hosted prototype](https://city-request-triage.vercel.app). It starts with synthetic demo records. Use **Load live 311 sample** to fetch up to 40 recent requests through the Vercel API route, or **Import CSV** to load an export, then choose **Run triage workflow**. Export the resulting queue as CSV.
 
-Python must be installed for the local server script. No packages or API key are required. The live sample also needs internet access to the data portal. If the API is unavailable, import a CSV export or use the synthetic demo records. Opening `index.html` directly as a `file://` URL may block the API request in some browsers.
+The live request runs through `api/requests.js` on Vercel, which fetches NYC Open Data server-side and caches a small response briefly. No API key is required. For a local static preview, double-click [`start_local_server.bat`](start_local_server.bat); use synthetic demo records or CSV import there. The local Python server does not run the Vercel API route.
 
 ## What it demonstrates
 
-- Ingest a bounded sample from a public API.
+- Fetch a bounded public-data sample through a same-origin Vercel API route.
 - Apply category and keyword routing rules.
 - Assign priorities using transparent prototype rules.
 - Explain each routing decision with a reason.
