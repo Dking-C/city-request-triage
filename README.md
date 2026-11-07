@@ -12,7 +12,7 @@ No build tools or API key are required. The live sample needs an internet connec
 
 - Ingest a bounded sample from a public API.
 - Apply category and keyword routing rules.
-- Assign demo priorities and target times.
+- Assign priorities using transparent prototype rules.
 - Explain each routing decision with a reason.
 - Catch missing fields, duplicate IDs, and unmatched categories for human review.
 - Search and filter the queue, record the run, and export decision reasons with the data.
