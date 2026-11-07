@@ -15,22 +15,24 @@ The live API call runs in the browser, so it needs internet access and the data 
 - Browser memory: demo queue and run log
 - CSV: portable export for downstream review
 
-This first version does not need n8n or Make to demonstrate the decision logic. Those tools become useful when you want scheduled ingestion, durable storage, and notifications. Airtable or a small database can replace browser memory when you add persistence.
+The current prototype does not need n8n or Make to demonstrate the decision logic. Those tools become useful when you want scheduled ingestion, durable storage, and notifications. Airtable or a small database can replace browser memory when you add persistence.
 
 ## Workflow design
 
 1. **Ingest:** request a bounded sample of recent 311 records.
 2. **Validate:** missing identifiers, categories, or boroughs go to a human review queue.
 3. **Route:** category and detail keywords suggest a team (DOT, DEP, DSNY, HPD, or NYPD).
-4. **Prioritize:** demo keyword rules assign High, Medium, or Standard priority and a sample target time.
-5. **Report:** show the queue, counts, decision log, and downloadable CSV.
+4. **Prioritize:** demo keyword rules assign High, Medium, or Standard priority.
+5. **Explain:** attach a reason to every routing decision so a reviewer can understand why a record moved.
+6. **Review exceptions:** missing required fields, duplicate IDs, and unmatched categories are held for a person rather than silently routed.
+7. **Report:** search and filter the queue, inspect counts and the run log, and download a CSV with decision reasons.
 
-Response targets and routing rules are illustrative portfolio logic. They are not NYC policy, agency service levels, or a claim that requests will be sent to city staff. The prototype does not send messages or write to a city system.
+Routing rules are illustrative portfolio logic. They are not NYC policy, agency service levels, or a claim that requests will be sent to city staff. The prototype does not send messages or write to a city system.
 
 ## Good next improvements
 
-- Move routing keywords and target times into an editable rules table.
-- Add deduplication and an idempotency key so a repeated import does not create repeated work.
+- Move routing keywords into an editable rules table.
+- Add durable deduplication across repeated imports with an idempotency key.
 - Persist runs and changes in Airtable or Supabase.
 - Add retry and error states around ingestion and notification steps.
 - Connect a scheduled Make or n8n flow to ingest records and send a notification to a test inbox or Slack channel.
@@ -39,3 +41,4 @@ Response targets and routing rules are illustrative portfolio logic. They are no
 ## Data source
 
 [NYC Open Data: 311 Service Requests from 2020 to Present](https://data.cityofnewyork.us/Social-Services/311-Service-Requests-from-2020-to-Present/erm2-nwe9/about_data). The portal describes the dataset as daily updated and notes that records contain request details, responding agency, and geographic information without customer identifying information. The prototype fetches only a small recent sample and uses a subset of fields.
+
