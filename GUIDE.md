@@ -4,13 +4,13 @@ A small portfolio prototype showing how a public service request can move from i
 
 ## Open the prototype
 
-Open `city_request_triage.html` in a modern browser. It starts with synthetic demonstration records. Select **Load live 311 sample** to request up to 40 recent records from the NYC Open Data API, then select **Run triage workflow**. Export the processed queue as CSV if you want to inspect the output.
+Open `index.html` in a modern browser. It starts with synthetic demonstration records. Select **Load live 311 sample** to request up to 40 recent records from the NYC Open Data API, or choose **Import CSV** to load a portal export, then select **Run triage workflow**. Export the processed queue as CSV if you want to inspect the output.
 
-The live API call runs in the browser, so it needs internet access and the data portal must allow the request. If that is unavailable, the synthetic records still demonstrate the workflow.
+The live API call runs in the browser, so it needs internet access and the data portal must be reachable. If the host cannot be reached, export a CSV from the data portal and import it; synthetic records remain available for a quick walkthrough. CSV imports are limited to 5 MB and the first 500 rows.
 
 ## Stack
 
-- NYC Open Data Socrata API: public source
+- NYC Open Data Socrata API or a portal CSV export: public source
 - HTML, CSS, JavaScript: small client-side prototype
 - Browser memory: demo queue and run log
 - CSV: portable export for downstream review
