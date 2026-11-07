@@ -4,9 +4,9 @@ A browser based portfolio prototype that turns a small public 311 request sample
 
 ## Try it
 
-Open [`index.html`](index.html) in a modern browser. The page starts with synthetic demo records. Use **Load live 311 sample** to fetch up to 40 recent requests from the NYC Open Data API, then choose **Run triage workflow**. Export the resulting queue as CSV.
+Open [`index.html`](index.html) in a modern browser. The page starts with synthetic demo records. Use **Load live 311 sample** to fetch up to 40 recent requests from NYC Open Data, or **Import CSV** to load an export, then choose **Run triage workflow**. Export the resulting queue as CSV.
 
-No build tools or API key are required. The live sample needs an internet connection and browser access to the data portal. If the API is unavailable, the synthetic records remain usable.
+No build tools or API key are required. The live sample needs an internet connection and browser access to the data portal. If the API is unavailable, import a CSV export or use the synthetic demo records.
 
 ## What it demonstrates
 
