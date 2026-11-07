@@ -20,10 +20,11 @@ export default {
     try {
       const upstream = await fetch(upstreamUrl, {
         headers: { Accept: "application/json" },
+        signal: AbortSignal.timeout(12_000),
       });
       const body = await upstream.text();
-      const headers = {
-        "Cache-Control": "public, s-maxage=300, stale-while-revalidate=600",
+      const noStoreHeaders = {
+        "Cache-Control": "no-store",
         "Content-Type": "application/json; charset=utf-8",
       };
 
@@ -31,16 +32,40 @@ export default {
         console.error("NYC Open Data returned an error", upstream.status, body);
         return Response.json(
           { error: `NYC Open Data returned HTTP ${upstream.status}.` },
-          { status: 502, headers },
+          { status: 502, headers: noStoreHeaders },
         );
       }
 
-      return new Response(body, { status: 200, headers });
+      return new Response(body, {
+        status: 200,
+        headers: {
+          "Cache-Control": "public, max-age=0, must-revalidate",
+          "Content-Type": "application/json; charset=utf-8",
+          "Vercel-CDN-Cache-Control":
+            "public, s-maxage=300, stale-while-revalidate=600",
+        },
+      });
     } catch (error) {
-      console.error("NYC Open Data request failed", error);
+      const timedOut =
+        error instanceof Error &&
+        (error.name === "TimeoutError" || error.name === "AbortError");
+      console.error(
+        timedOut ? "NYC Open Data request timed out" : "NYC Open Data request failed",
+        error,
+      );
       return Response.json(
-        { error: "The Vercel server could not reach NYC Open Data." },
-        { status: 502 },
+        {
+          error: timedOut
+            ? "NYC Open Data took too long to respond. Please try again."
+            : "The Vercel server could not reach NYC Open Data.",
+        },
+        {
+          status: timedOut ? 504 : 502,
+          headers: {
+            "Cache-Control": "no-store",
+            "Content-Type": "application/json; charset=utf-8",
+          },
+        },
       );
     }
   },
