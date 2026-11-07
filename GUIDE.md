@@ -4,9 +4,9 @@ A small portfolio prototype showing how a public service request can move from i
 
 ## Open the prototype
 
-Open `index.html` in a modern browser. It starts with synthetic demonstration records. Select **Load live 311 sample** to request up to 40 recent records from the NYC Open Data API, or choose **Import CSV** to load a portal export, then select **Run triage workflow**. Export the processed queue as CSV if you want to inspect the output.
+For live API access, run `start_local_server.bat`, leave the terminal window open, and visit `http://localhost:8000`. This serves the page from a localhost origin; opening the file directly may cause the browser to block a cross-origin API call. The page starts with synthetic demonstration records. Select **Load live 311 sample** to request up to 40 recent records from the NYC Open Data API, or choose **Import CSV** to load a portal export, then select **Run triage workflow**. Export the processed queue as CSV if you want to inspect the output.
 
-The live API call runs in the browser, so it needs internet access and the data portal must be reachable. If the host cannot be reached, export a CSV from the data portal and import it; synthetic records remain available for a quick walkthrough. CSV imports are limited to 5 MB and the first 500 rows.
+The live API call runs in the browser, so it needs internet access and the data portal must be reachable. Python is required only to launch the local server; no additional packages are needed. If the host cannot be reached, export a CSV from the data portal and import it; synthetic records remain available for a quick walkthrough. CSV imports are limited to 5 MB and the first 500 rows.
 
 ## Stack
 
