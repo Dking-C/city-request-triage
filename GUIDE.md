@@ -4,14 +4,15 @@ A small portfolio prototype showing how a public service request can move from i
 
 ## Open the prototype
 
-For live API access, run `start_local_server.bat`, leave the terminal window open, and visit `http://localhost:8000`. This serves the page from a localhost origin; opening the file directly may cause the browser to block a cross-origin API call. The page starts with synthetic demonstration records. Select **Load live 311 sample** to request up to 40 recent records from the NYC Open Data API, or choose **Import CSV** to load a portal export, then select **Run triage workflow**. Export the processed queue as CSV if you want to inspect the output.
+Open the hosted prototype at `https://city-request-triage.vercel.app` for live data. The page starts with synthetic demonstration records. Select **Load live 311 sample** to request up to 40 recent records through the same-origin `/api/requests` Vercel Function, or choose **Import CSV** to load a portal export, then select **Run triage workflow**. Export the processed queue as CSV if you want to inspect the output.
 
-The live API call runs in the browser, so it needs internet access and the data portal must be reachable. Python is required only to launch the local server; no additional packages are needed. If the host cannot be reached, export a CSV from the data portal and import it; synthetic records remain available for a quick walkthrough. CSV imports are limited to 5 MB and the first 500 rows.
+The Vercel Function fetches NYC Open Data server-side, so the browser calls only the project's own origin and avoids a direct cross-origin request. The route returns a clear upstream error if Vercel cannot reach the data host and caches successful results briefly. The Python local server serves the static page only; local runs should use demo records or CSV import unless you use `vercel dev`. CSV imports are limited to 5 MB and the first 500 rows.
 
 ## Stack
 
 - NYC Open Data Socrata API or a portal CSV export: public source
-- HTML, CSS, JavaScript: small client-side prototype
+- Vercel Function (`api/requests.js`): server-side API proxy and short cache
+- HTML, CSS, JavaScript: client-side prototype
 - Browser memory: demo queue and run log
 - CSV: portable export for downstream review
 
@@ -19,7 +20,7 @@ The current prototype does not need n8n or Make to demonstrate the decision logi
 
 ## Workflow design
 
-1. **Ingest:** request a bounded sample of recent 311 records.
+1. **Ingest:** the browser calls `/api/requests`; the Vercel Function fetches a bounded sample of recent 311 records.
 2. **Validate:** missing identifiers, categories, or boroughs go to a human review queue.
 3. **Route:** category and detail keywords suggest a team (DOT, DEP, DSNY, HPD, or NYPD).
 4. **Prioritize:** demo keyword rules assign High, Medium, or Standard priority.
